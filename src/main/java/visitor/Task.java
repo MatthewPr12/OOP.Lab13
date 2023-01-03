@@ -28,4 +28,6 @@ public abstract class Task<T> {
     public String getHeader(String header) {
         return headers.get(header);
     }
+
+    public abstract void stamp(Visitor<T> visitor);
 }

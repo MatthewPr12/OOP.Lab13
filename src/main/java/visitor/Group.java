@@ -27,6 +27,15 @@ public class Group<T> extends Task<T> {
     }
 
     @Override
+    public void stamp(Visitor<T> visitor) {
+        visitor.onGroupStart(this);
+        for(Task<T> task: tasks){
+            task.stamp(visitor);
+        }
+        visitor.onGroupEnd(this);
+    }
+
+    @Override
     public void apply(T arg) {
         this.freeze();
         tasks = Collections.unmodifiableList(tasks);

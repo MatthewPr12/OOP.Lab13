@@ -1,7 +1,6 @@
 package visitor;
 
 
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class Signature<T> extends Task<T> {
@@ -13,5 +12,10 @@ public class Signature<T> extends Task<T> {
     public void apply(T arg) {
         this.freeze();
         consumer.accept(arg);
+    }
+
+    @Override
+    public void stamp(Visitor<T> visitor) {
+        this.setHeader("groups", visitor.onSignature(this).get("groups"));
     }
 }
